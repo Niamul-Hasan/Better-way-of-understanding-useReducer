@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 const ReducerCounter = () => {
     const initialState = 0;
     const reducerFunction = (prevstate, action) => {
-        console.log(action);
+        // console.log(action);
         if (action.type === 'INCREMENT') {
             return prevstate + 1;
         } else if (action.type === "DECREMENT") {
