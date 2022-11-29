@@ -1,54 +1,16 @@
 import React, { useReducer } from 'react';
+import { initialState, reducerFunction } from './States/ReducerFunction';
 
 const ComplexForm = () => {
-    const initialState = {
-        firstname: "",
-        lastname: "",
-        email: "",
-        gender: '',
-        education: "",
-        quantity: 0,
-        feedback: "",
-        term: false,
-    };
 
-    const renderFunction = (state, action) => {
-        switch (action.type) {
-            case "INPUT":
-                return {
-                    ...state,
-                    [action.payload.name]: action.payload.value,
-                }
-            case "TOGGLE":
-                return {
-                    ...state,
-                    term: !state.term,
-                }
-            case "INCREMENT":
-                return {
-                    ...state,
-                    quantity: state.quantity + 1,
-                }
-            case "DECREMENT":
-                return {
-                    ...state,
-                    quantity: state.quantity - 1,
-                }
-            default:
-                return { ...state }
-        }
-
-    }
-
-
-    const [state, dispatch] = useReducer(renderFunction, initialState)
+    const [state, dispatch] = useReducer(reducerFunction, initialState)
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(state)
+        console.log(state);
     }
     return (
-        <div className='w-1/2 mx-auto shadow-md p-5 my-3'>
+        <div className='w-1/2 mx-auto shadow-lg p-5 my-3 bg-orange-100'>
             <h1 className='text-blue-200 text-center mb-2'>Sample Form</h1>
             <form onSubmit={handleSubmit} className='grid grid-cols-2'>
                 <div>
@@ -141,8 +103,8 @@ const ComplexForm = () => {
                     >
                         <option value="SSC">SSC</option>
                         <option value="HSC">HSC</option>
-                        <option value="Gradgute">Gradgute</option>
-                        <option value="UnderGradgute">Under Gradgute</option>
+                        <option value="Graduate">Graduate</option>
+                        <option value="UnderGraduate">Under Graduate</option>
                     </select>
                 </div>
                 {/* drop down end  */}
@@ -178,7 +140,7 @@ const ComplexForm = () => {
                     <div className='mt-3 flex flex-row '>
                         <div>
                             <input type='checkbox' onClick={() => dispatch({ type: "TOGGLE" })} />
-                            <span className='ml-2 text-sm text-lime-600'>I Am Agree With The Terms and Conditions</span>
+                            <span className={`ml-2 text-sm ${state.term ? 'text-lime-600' : 'text-red-500'}`}>I Am Agree With The Terms and Conditions</span>
                         </div>
 
                         <div>
